@@ -1,0 +1,70 @@
+/*MEDIA QUERIES FOR MOBILE*/
+
+/*@media only screen and (max-width: 1024px) and (min-width: 320px){}*/
+
+
+
+@media only screen and (max-width: 768px) and (min-width: 320px){
+	.recommended-img .card {
+    min-height: 525px;
+	}
+
+}
+
+
+ @media only screen and (max-width: 500px) and (min-width: 320px){
+    #title1 {
+        font-size: 35px;
+    }
+
+    #description {
+    	font-size: 22px;
+    	padding: 10px;
+    	top: 0px;
+    }
+
+    .intro-slider {
+    	width: 100%;
+    	margin-top: 45px;
+    	overflow: hidden;
+    }
+
+    .btn {
+    	font-size: 11px;
+    }
+
+    .section-title {
+	    font-family: 'Montserrat', sans-serif;
+	    font-weight: bold;
+	    font-size: 25px;
+	}
+
+	i {
+		padding: 10px 15px 10px 15px;
+	}
+
+	.redes {
+		font-size: 15px;
+	}
+
+	.images {
+		text-align: center;
+		width: auto;
+	}
+
+	.recommended-img .card {
+	min-height: 450px;
+}
+
+}
+
+
+ @media only screen and (max-width: 500px) and (min-width: 320px){
+    .forma {
+        margin-top: 160px;
+    }
+ }
+
+
+
+/*ENDS MEDIA QUERIES*/

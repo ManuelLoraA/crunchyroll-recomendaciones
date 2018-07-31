@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Crunchyroll: Everything Anime</title>
+        <!-- Links de Bootstrap y css -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+        <!-- bulma -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.0/css/bulma.min.css"> -->
+        <!-- Slick Slider Style -->
+  <link rel="stylesheet" type="text/css" href="js/plugins/slick/slick-theme.css">
+  <link rel="stylesheet" type="text/css" href="js/plugins/slick/slick.css">
+        <!-- Slick Slider Ends -->
+  <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+        <!-- Image Hover -->
+  <link rel="stylesheet" href="js/plugins/imagehover/css/imagehover.min.css">
+  <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+  <link rel="stylesheet" type="text/css" href="css/mediaqueries.css">
+        <!-- Smooth Scroll -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+      // Add smooth scrolling to all links
+      $("a").on('click', function(event) {
+
+        // Make sure this.hash has a value before overriding default behavior
+        if (this.hash !== "") {
+          // Prevent default anchor click behavior
+          event.preventDefault();
+
+          // Store hash
+          var hash = this.hash;
+
+          // Using jQuery's animate() method to add smooth page scroll
+          // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+          $('html, body').animate({
+            scrollTop: $(hash).offset().top
+          }, 800, function(){
+
+            // Add hash (#) to URL when done scrolling (default click behavior)
+            window.location.hash = hash;
+          });
+        } // End if
+      });
+    });
+    </script>
+     <style>
+    body, html, .main {
+        height: 100%;
+    }
+
+    section {
+        min-height: 100%;
+    }
+    </style>
+</head>
+<body>
+<div id="root">
+    <div class="intro-content">
+      <!-- Copy-Bar -->
+          <div class="container-fluid">
+              <div class="barra">
+                <div class="container">
+                   <img class="logo" src="images/crunchylogo.png">
+                   <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-if="show_more">
+                        {{ email }}
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item item-so" href="index.html">Sign Out</a>
+                      </div>
+                    </div>
+                </div>
+                 
+              </div>
+          </div>
+            <!-- Form -->
+        <div class="col-xs-12">
+
+              <div class="container">
+                  <div class="forma">
+                    <h1 id="title1">¿No sabes qué series ver?</h1><br>
+                    <p id="description">Nosotros te ayudamos</p>
+                  </div>
+
+                  <form class="login" >
+                    <input class="intlogin" type="text" placeholder="correo electrónico" name="uname" v-if="!show_more" v-model="email" required>
+                    <br>
+                    <input class="intlogin" v-if="!show_more" type="password" placeholder="contraseña" name="psw" required>
+                  </form>
+
+
+                  <div class="button" v-if="!show_more">
+                      <a class="btn2 btn-large" href="#" @click="getRecommendations">RECOMENDAR</a>
+                  </div>
+
+                  <div id="section10" class="demo">
+                      <a href="#numberone"><span v-if="show_more"></span></a>
+                 </div>
+              </div>
+
+        </div>
+
+            <div class="intro-back"><!-- <img src="images/header.png"> --></div>
+            <!-- <div><img src="images/header2.png"></div>
+            <div><img src="images/header.png"></div> -->
+    </div>
+
+      
+
+    <div class="container-fluid">
+        <div class="container" id="numberone" v-for="elem in number_one">
+                <div class="col-md-4 recommended-img">
+                    <a :href="elem.url"><img :src="elem.portrait_image.large_url" alt="Image">
+                    </a>
+                </div>
+                <div class="col-md-8 textos">
+                    <h3><a class="recommended-title" :href="elem.url" target="_blank">{{ elem.name }}</a></h3>
+                    <p class="recommended-text">{{ elem.description }}</p>
+            </div>
+        </div>
+    </div>
+
+        <div class="container">
+                <!-- <ul class="stylenone">
+                    <li v-for="elem in recommendations"> -->
+
+                        <!-- <div class="container"> -->
+                            <div class="col-md-3 recommended-img" v-for="elem in recommendations">
+                                <div class="card">
+                                    <div class="card-img-top">
+                                        <a :href="elem.url" target="_blank"><img :src="elem.portrait_image.large_url" alt="Image"></a>
+                                    </div>
+                                    <div class="card-text">
+                                        <h3><a class="recommended-title2" :href="elem.url" target="_blank">{{ elem.name }}</a></h3>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <!-- <div class="col-md-8">
+                                <h3 class="recommended-title"><a class="recommended-title2" :href="elem.url" target="_blank">{{ elem.name }}</a></h3>
+                                <p class="recommended-text">{{ elem.description }}</p>
+                            </div> -->
+                        <!-- </div> -->
+
+                    <!-- </li>
+                </ul> -->
+
+              <div class="col-md-12 boton" v-if="show_more">
+                  <button class="vermas" @click="getMoreRecommendations">VER MÁS</button>
+              </div>
+        </div>
+
+</div>
+
+    <div class="container section-one">
+        <h3 class="section-title">POPULARES</h3>
+        <div class="row images">
+            <div class="col-md-2 section-img"><img src="images/dragonball.jpg"></div>
+            <div class="col-md-2 section-img"><img src="images/mha2.jpg"></div>
+            <div class="col-md-2 section-img"><img src="images/monterhunter.jpg"></div>
+            <div class="col-md-2 section-img"><img src="images/onepiece.jpg"></div>
+            <div class="col-md-2 section-img"><img src="images/re.jpg"></div>
+            <div class="col-md-2 section-img"><img src="images/myheroacademia.jpg"></div>
+        </div>
+        <h3 class="section-title2">EN EMISIÓN</h3>
+        <div class="row images">
+            <div class="col-md-2 section-img"><img src="images/dragonball.jpg"></div>
+            <div class="col-md-2 section-img"><img src="images/mha2.jpg"></div>
+            <div class="col-md-2 section-img"><img src="images/monterhunter.jpg"></div>
+            <div class="col-md-2 section-img"><img src="images/onepiece.jpg"></div>
+            <div class="col-md-2 section-img"><img src="images/re.jpg"></div>
+            <div class="col-md-2 section-img"><img src="images/myheroacademia.jpg"></div>
+        </div>
+    </div>
+
+  <div class="container-fluid footer">
+    <div class="container">
+      <div class="f-description">
+        <img class="footerimg" src="images/crunchylogo.png">
+        <div class="line"></div>
+        <p class="footertext">lorem ipsum sit amet amet
+          sit lorem hello, people is act
+          ually beautiful when they are not<br>
+          trying to be something else.</p>
+      </div>
+      <div class="redes">
+        <a target="_blank" href="https://www.facebook.com/Crunchyroll.la/">
+        <i class="fa fa-facebook" aria-hidden="true"></i></a>
+        <a target="_blank" href="https://www.instagram.com/crunchyroll_es/">
+        <i class="fa fa-instagram" aria-hidden="true"></i></a>
+        <a target="_blank" href="https://www.youtube.com/user/crunchyrollspanish">
+        <i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+        <a target="_blank" href="https://twitter.com/crunchyroll_es">
+        <i class="fa fa-twitter" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <!-- Smooth Scroll -->
+    <script type="text/javascript">
+    window.scroll({
+     top: 2500,
+     left: 0,
+     behavior: 'smooth'
+      });
+    </script>
+
+    <!-- Scripts principales Bootstrap y JS -->
+  <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+          <!-- Slick Slider js -->
+  <script type="text/javascript" src="js/plugins/slick/slick.js"></script>
+
+   <script type="text/javascript">
+      $(document).ready(function(){
+          // $('.intro-slider').slick({
+          //     dots: false,
+          //     arrows: false,
+          //     autoplay: true,
+          //     autoplaySpeed: 1500,
+          //     infinite: true,
+          //     slidesToShow: 1,
+          //     adaptiveHeight: false
+          // });
+      });
+    </script>
+
+    <script type="text/javascript">
+      $(function() {
+        $('a[href*=#]').on('click', function(e) {
+          e.preventDefault();
+
+          $('html, body').animate({ 
+            scrollTop: $($(this).attr('href')).offset().top}, 500, 'linear');
+          });
+      });
+    </script>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+
+        let recommender = axios.create({
+            baseURL: 'http://192.168.1.61:5000/',
+            setTimeout: 1000
+
+            //headers: {"x-custom-header": "foobar"}
+        });
+
+        // let kitsu = axios.create({
+        //     baseURL: 'https://kitsu.io/api/edge/',
+        //     setTimeout: 1000
+        // })
+
+        new Vue({
+
+            el:"#root",
+
+            data:{
+                email: "",
+                // trending: [],
+                // upcomming: [],
+                number_one: [],
+                recommendations: [],
+                num_recommendations: 20,
+                show_more: false
+            },
+
+            mounted: function(){
+                        this.getTrending();
+                        this.getUpcomming();
+                    },
+
+
+            methods: {
+
+                getRecommendations(){
+
+                    recommender.get('v1.0/recommend?user_mail='
+                                        + this.email
+                                        + '&num_items='
+                                        + this.num_recommendations
+                    )
+                    .then((response) => {
+                        this.recommendations = response.data.recommendations;
+                        this.number_one = this.recommendations.splice(0,1);
+                        this.show_more = true;
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+                },
+
+                getMoreRecommendations(){
+                    this.num_recommendations += 5;
+                    this.getRecommendations()
+                },
+
+                // getTrending(){
+                //     kitsu.get('trending/anime?limit=5')
+                //     //kitsu.get('filter%5Bstreamers%5D=crunchyroll')
+                //         .then((response) => {
+                //             this.trending = response.data;
+                //             //console.log(this.favorites);
+                //         })
+                //         .catch((error) => {
+                //             console.log(error);
+                //         });
+                // },
+
+                // getUpcomming(){
+                //     kitsu.get('anime?filter%5Bstatus%5D=upcoming&page%5Blimit%5D=5&sort=-user_count')
+                //        .then((response) => {
+                //          this.upcomming = response.data;
+                //          //console.log(this.favorites);
+                //        })
+                //        .catch((error) => {
+                //          console.log(error);
+                //        });
+                // }
+            }
+        })
+
+    </script>
+
+</body>
+</html>
